@@ -1,3 +1,7 @@
+print ("Group Name: Super Cool SE Python club")
+print ("Prototype No: Version v01")
+print("\n")
+
 class UVSim:
     r0pc = 0
     r1acc = 0

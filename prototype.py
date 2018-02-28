@@ -24,7 +24,8 @@ class UVSim:
         while not self.halted:
             self.step()
 
-    def step(self):
+class step:
+    def _init_(self):
         instruction = self.mem[self.r0pc]
         if instruction < 0:
             raise ValueError("INVALID INSTRUCTION AT MEMORY LOCATION {i:02d}".format(self.r0pc))
@@ -57,57 +58,71 @@ class UVSim:
         else:
             raise ValueError("INVALID INSTRUCTION AT MEMORY LOCATION {i:02d}".format(self.r0pc))
 
-    def read(self, loc):
+class read:
+    def _init_(self, loc):
         self.mem[loc] = int(input("INPUT: "))
         self.r0pc += 1
 
-    def write(self, loc):
+class write:
+    def _init_(self, loc):
         print("OUTPUT: {}".format(self.mem[loc]))
         self.r0pc += 1
 
-    def load(self, loc):
+class load:
+    def _init_(self, loc):
         self.r1acc = self.mem[loc]
         self.r0pc += 1
 
-    def store(self, loc):
+class store:
+    def _init_(self, loc):
         self.mem[loc] = self.r1acc
         self.r0pc += 1
 
-    def add(self, loc):
+class add:
+    def _init_(self, loc):
         self.r1acc = self.r1acc + self.mem[loc]
         self.r0pc += 1
 
-    def subtract(self, loc):
+class subtract:
+    def _subtract_(self, loc):
         self.r1acc = self.r1acc - self.mem[loc]
         self.r0pc += 1
 
-    def divide(self, loc):
+class divide:
+    def _divide_(self, loc):
         self.r1acc = self.r1acc // self.mem[loc]
         self.r0pc += 1
 
-    def multiply(self, loc):
+class multiply:
+    def _init_(self, loc):
         self.r1acc = self.r1acc * self.mem[loc]
         self.r0pc += 1
 
-    def branch(self, loc):
+
+class branch:
+    def _init_(self, loc):
         self.r0pc = loc
 
-    def branchneg(self, memloc):
+class branchneg:
+    def _init_(self, memloc):
         if self.r1acc < 0:
             self.r0pc = memloc
         else:
             self.r0pc += 1
 
-    def branchzero(self, memloc):
+class branchzero:
+    def _init_(self, memloc):
         if self.r1acc == 0:
             self.r0pc = memloc
         else:
             self.r0pc += 1
 
-    def halt(self):
+class halt:
+    def _init_(self):
         self.halted = True
 
-    def memdump(self):
+class memdump:
+    def _init_(self):
         print("R0 - Program Counter: {j:+05d}".format(j=self.r0pc))
         print("R1 - Accumulator: {j:+05d}".format(j=self.r1acc))
         print("  ", end='')
